@@ -2167,7 +2167,7 @@ sbrkmuch(char *s)
   }
 
   a = sbrk(0);
-  c = sbrk(-(sbrk(0) - oldbrk));
+  c = sbrk(-((char*)sbrk(0) - oldbrk));
   if(c != a){
     printf("%s: sbrk downsize failed, a %x c %x\n", s, a, c);
     exit(1);

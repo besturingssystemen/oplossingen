@@ -106,6 +106,7 @@ extern uint64 sys_write(void);
 extern uint64 sys_uptime(void);
 extern uint64 sys_vmprintmappings(void);
 extern uint64 sys_getnumsyscalls(void);
+extern uint64 sys_traceme(void);
 
 static uint64 (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -131,6 +132,7 @@ static uint64 (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_vmprintmappings] sys_vmprintmappings,
 [SYS_getnumsyscalls] sys_getnumsyscalls,
+[SYS_traceme] sys_traceme,
 };
 
 void
@@ -142,6 +144,11 @@ syscall(void)
   p->numsyscalls++;
 
   num = p->trapframe->a7;
+
+  if (p->traceme) {
+    printf("[%d] syscall %d\n", p->pid, num);
+  }
+
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     p->trapframe->a0 = syscalls[num]();
   } else {

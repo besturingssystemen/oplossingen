@@ -25,5 +25,6 @@
 #define SYS_close  21
 #define SYS_vmprintmappings 22
 #define SYS_getnumsyscalls 23
+#define SYS_traceme 24
 
 #endif

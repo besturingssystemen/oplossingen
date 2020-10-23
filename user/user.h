@@ -30,6 +30,7 @@ int sleep(int);
 int uptime(void);
 void vmprintmappings(void);
 int getnumsyscalls(void);
+void traceme(int);
 
 // ulib.c
 int stat(const char*, struct stat*);

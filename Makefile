@@ -138,6 +138,7 @@ UPROGS=\
 	$U/_zombie\
 	$U/_helloworld\
 	$U/_hello_asm_puts\
+	$U/_hello_asm_write\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

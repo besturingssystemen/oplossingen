@@ -24,6 +24,12 @@ sys_getpid(void)
 }
 
 uint64
+sys_getnumsyscalls(void)
+{
+  return myproc()->numsyscalls;
+}
+
+uint64
 sys_fork(void)
 {
   return fork();

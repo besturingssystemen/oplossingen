@@ -105,6 +105,7 @@ extern uint64 sys_wait(void);
 extern uint64 sys_write(void);
 extern uint64 sys_uptime(void);
 extern uint64 sys_vmprintmappings(void);
+extern uint64 sys_getnumsyscalls(void);
 
 static uint64 (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -129,6 +130,7 @@ static uint64 (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_vmprintmappings] sys_vmprintmappings,
+[SYS_getnumsyscalls] sys_getnumsyscalls,
 };
 
 void
@@ -136,6 +138,8 @@ syscall(void)
 {
   int num;
   struct proc *p = myproc();
+
+  p->numsyscalls++;
 
   num = p->trapframe->a7;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {

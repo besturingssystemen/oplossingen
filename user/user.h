@@ -29,6 +29,7 @@ void* sbrk(int);
 int sleep(int);
 int uptime(void);
 void vmprintmappings(void);
+int getnumsyscalls(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -74,7 +74,7 @@ pipeclose(struct pipe *pi, int writable)
 }
 
 int
-pipewrite(struct pipe *pi, uint64 addr, int n)
+pipewrite(struct pipe *pi, int user_src, uint64 addr, int n)
 {
   int i;
   char ch;
@@ -90,8 +90,12 @@ pipewrite(struct pipe *pi, uint64 addr, int n)
       wakeup(&pi->nread);
       sleep(&pi->nwrite, &pi->lock);
     }
-    if(copyin(pr->pagetable, &ch, addr + i, 1) == -1)
-      break;
+    if(user_src) {
+      if(copyin(pr->pagetable, &ch, addr + i, 1) == -1)
+        break;
+    } else {
+      ch = *(char*)(addr + i);
+    }
     pi->data[pi->nwrite++ % PIPESIZE] = ch;
   }
   wakeup(&pi->nread);

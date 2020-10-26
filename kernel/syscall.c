@@ -6,6 +6,7 @@
 #include "proc.h"
 #include "syscall.h"
 #include "defs.h"
+#include "trace.h"
 
 // Fetch the uint64 at addr from the current process.
 int
@@ -141,13 +142,11 @@ syscall(void)
   int num;
   struct proc *p = myproc();
 
+  trace_syscall();
+
   p->numsyscalls++;
 
   num = p->trapframe->a7;
-
-  if (p->traceme) {
-    printf("[%d] syscall %d\n", p->pid, num);
-  }
 
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     p->trapframe->a0 = syscalls[num]();

@@ -30,19 +30,6 @@ sys_getnumsyscalls(void)
 }
 
 uint64
-sys_traceme(void)
-{
-  int traceme;
-
-  if(argint(0, &traceme) < 0) {
-    return -1;
-  }
-
-  myproc()->traceme = traceme;
-  return 0;
-}
-
-uint64
 sys_fork(void)
 {
   return fork();

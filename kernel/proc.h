@@ -112,7 +112,7 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
   uint64 numsyscalls;          // Number of syscalls this process executed
-  int traceme;                 // 1 if this process is tracing its system calls
+  int tracefd;                 // fd this process is writing traces to
 };
 
 #endif

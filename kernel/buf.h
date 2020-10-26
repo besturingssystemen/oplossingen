@@ -1,6 +1,10 @@
 #ifndef XV6_KERNEL_BUF_H
 #define XV6_KERNEL_BUF_H
 
+#include "types.h"
+#include "sleeplock.h"
+#include "fs.h"
+
 struct buf {
   int valid;   // has data been read from disk?
   int disk;    // does disk "own" buf?

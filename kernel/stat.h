@@ -1,6 +1,8 @@
 #ifndef XV6_KERNEL_STAT_H
 #define XV6_KERNEL_STAT_H
 
+#include "types.h"
+
 #define T_DIR     1   // Directory
 #define T_FILE    2   // File
 #define T_DEVICE  3   // Device

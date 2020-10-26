@@ -1,6 +1,9 @@
 #ifndef XV6_KERNEL_DEFS_H
 #define XV6_KERNEL_DEFS_H
 
+#include "types.h"
+#include "riscv.h"
+
 struct buf;
 struct context;
 struct file;

@@ -1,6 +1,11 @@
 #ifndef XV6_KERNEL_PROC_H
 #define XV6_KERNEL_PROC_H
 
+#include "types.h"
+#include "riscv.h"
+#include "param.h"
+#include "spinlock.h"
+
 // Saved registers for kernel context switches.
 struct context {
   uint64 ra;

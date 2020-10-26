@@ -1,6 +1,8 @@
 #ifndef XV6_KERNEL_MEMLAYOUT_H
 #define XV6_KERNEL_MEMLAYOUT_H
 
+#include "riscv.h"
+
 // Physical memory layout
 
 // qemu -machine virt is set up like this,

@@ -1,6 +1,8 @@
 #ifndef XV6_KERNEL_FS_H
 #define XV6_KERNEL_FS_H
 
+#include "types.h"
+
 // On-disk file system format.
 // Both the kernel and user programs use this header file.
 

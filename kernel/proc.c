@@ -189,6 +189,18 @@ proc_pagetable(struct proc *p)
     return 0;
   }
 
+  // map the vdso just below TRAPFRAME
+  extern char _vdso_start[];
+  if(mappages(pagetable, VDSO, PGSIZE, (uint64)_vdso_start, PTE_R | PTE_U) < 0){
+    // if the vdso mapping failed, we have to make sure that all mappings
+    // already made for this process are removed because this process is killed
+    // immediately.
+    uvmunmap(pagetable, TRAPFRAME, 1, 0);
+    uvmunmap(pagetable, TRAMPOLINE, 1, 0);
+    uvmfree(pagetable, 0);
+    return 0;
+  }
+
   return pagetable;
 }
 
@@ -199,6 +211,7 @@ proc_freepagetable(pagetable_t pagetable, uint64 sz)
 {
   uvmunmap(pagetable, TRAMPOLINE, 1, 0);
   uvmunmap(pagetable, TRAPFRAME, 1, 0);
+  uvmunmap(pagetable, VDSO, 1, 0);
   uvmfree(pagetable, sz);
 }
 

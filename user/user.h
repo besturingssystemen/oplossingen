@@ -31,6 +31,9 @@ int uptime(void);
 void vmprintmappings(void);
 void halt(void) __attribute__((noreturn));
 
+// vdso calls
+int fastuptime(void);
+
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);

@@ -40,5 +40,13 @@ SECTIONS
     *(.bss .bss.*)
   }
 
+  .vdso : {
+    _vdso_start = .;
+    . = ALIGN(0x1000);
+    *(.vdso);
+    . = ALIGN(0x1000);
+    ASSERT(. - _vdso_start == 0x1000, "error: vdso larger than one page");
+  }
+
   PROVIDE(end = .);
 }

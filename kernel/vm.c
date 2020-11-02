@@ -429,3 +429,32 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
     return -1;
   }
 }
+
+static void print_pagetable(pagetable_t pagetable, uint64 base_va, int level)
+{
+  for (uint64 pte_i = 0; pte_i < 512; ++pte_i) {
+    pte_t* pte = &pagetable[pte_i];
+    uint64 pte_va = base_va | (pte_i << PXSHIFT(level));
+    uint64 pte_pa = PTE2PA(*pte);
+    uint pte_flags = PTE_FLAGS(*pte);
+
+    if (pte_flags & PTE_V) {
+      if (level == 0) {
+        char mode = (pte_flags & PTE_U) ? 'U' : 'S';
+        char r    = (pte_flags & PTE_R) ? 'r' : '-';
+        char w    = (pte_flags & PTE_W) ? 'w' : '-';
+        char x    = (pte_flags & PTE_X) ? 'x' : '-';
+        printf("%p -> %p, mode=%c, perms=%c%c%c\n", pte_va, pte_pa, mode, r, w, x);
+      } else {
+        pagetable_t next_pagetable = (pagetable_t)pte_pa;
+        print_pagetable(next_pagetable, pte_va, level - 1);
+      }
+    }
+  }
+}
+
+void
+vmprintmappings(pagetable_t pagetable)
+{
+  print_pagetable(pagetable, 0, 2);
+}

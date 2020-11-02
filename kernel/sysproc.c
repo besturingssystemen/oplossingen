@@ -95,3 +95,10 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_vmprintmappings(void)
+{
+  vmprintmappings(myproc()->pagetable);
+  return 0;
+}

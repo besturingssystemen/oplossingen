@@ -28,6 +28,7 @@ int getpid(void);
 void* sbrk(int);
 int sleep(int);
 int uptime(void);
+void vmprintmappings(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -94,7 +94,7 @@ tags: $(OBJS) _init
 ULIB = $U/ulib.o $U/usys.o $U/printf.o $U/umalloc.o $U/puts.o $U/crt0.o
 
 _%: %.o $(ULIB)
-	$(LD) $(LDFLAGS) -N -e _start -Ttext 0 -o $@ $^
+	$(LD) $(LDFLAGS) -e _start -Ttext 0 -T user/user.ld -o $@ $^
 	$(OBJDUMP) -S $@ > $*.asm
 	$(OBJDUMP) -t $@ | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' > $*.sym
 

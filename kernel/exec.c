@@ -56,6 +56,20 @@ exec(char *path, char **argv)
       goto bad;
     if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) < 0)
       goto bad;
+
+    uint flags = PTE_V | PTE_U;
+
+    if (ph.flags & ELF_PROG_FLAG_EXEC) {
+      flags |= PTE_X;
+    }
+    if (ph.flags & ELF_PROG_FLAG_WRITE) {
+      flags |= PTE_W;
+    }
+    if (ph.flags & ELF_PROG_FLAG_READ) {
+      flags |= PTE_R;
+    }
+
+    vmsetflags(pagetable, ph.vaddr, ph.memsz, flags);
   }
   iunlockput(ip);
   end_op();

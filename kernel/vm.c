@@ -340,6 +340,21 @@ uvmclear(pagetable_t pagetable, uint64 va)
   *pte &= ~PTE_U;
 }
 
+void
+vmsetflags(pagetable_t pagetable, uint64 base_va, uint64 len, uint flags)
+{
+  for (uint64 va = base_va; va < base_va + len; va += PGSIZE) {
+    pte_t* pte = walk(pagetable, va, /*alloc=*/0);
+
+    if (pte == 0) {
+      panic("vmsetflags");
+    }
+
+    *pte &= ~PTE_FLAGS_MASK;
+    *pte |= (flags & PTE_FLAGS_MASK);
+  }
+}
+
 // Copy from kernel to user.
 // Copy len bytes from src to virtual address dstva in a given page table.
 // Return 0 on success, -1 on error.

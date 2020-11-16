@@ -1,3 +1,13 @@
+# Oplossingen oefenzittingen Besturingssystemen
+
+Per oefenzitting is er een aparte branch gemaakt waarop alle oplossingen staan.
+Als je de oplossingen lokaal wil bekijken, kan je deze branch uitchecken:
+```
+git checkout branch-name
+```
+
+Per oefening is er een commit gemaakt die je via de onderstaande links kan bekijken.
+
 # OS interfaces
 
 Branch: [os-interface](https://github.com/besturingssystemen/oplossingen/tree/os-interfaces)

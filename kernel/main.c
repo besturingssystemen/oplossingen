@@ -43,3 +43,9 @@ main()
 
   scheduler();        
 }
+
+uint64 sys_halt()
+{
+  *(uint32*)SIFIVE_TEST = 0x5555;
+  return 0;
+}

@@ -24,5 +24,6 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_vmprintmappings 22
+#define SYS_halt   23
 
 #endif

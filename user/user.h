@@ -40,6 +40,7 @@ int strcmp(const char*, const char*);
 void fprintf(int, const char*, ...);
 void printf(const char*, ...);
 void puts(const char*);
+char* fgets(char *buf, int max, int fd);
 char* gets(char*, int max);
 uint strlen(const char*);
 void* memset(void*, int, uint);

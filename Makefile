@@ -138,6 +138,8 @@ UPROGS=\
 	$U/_zombie\
 	$U/_halt\
 
+UPROGS += $(EXTRA_UPROGS)
+
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
 

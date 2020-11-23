@@ -140,8 +140,8 @@ UPROGS=\
 
 UPROGS += $(EXTRA_UPROGS)
 
-fs.img: mkfs/mkfs README $(UPROGS)
-	mkfs/mkfs fs.img README $(UPROGS)
+fs.img: mkfs/mkfs README $(UPROGS) $(EXTRA_FS_FILES)
+	mkfs/mkfs fs.img README $(UPROGS) $(EXTRA_FS_FILES)
 
 -include kernel/*.d user/*.d
 
